@@ -6,14 +6,37 @@ import (
 	"github.com/xoom/stash"
 )
 
-// Stash client for interfacing with Stash version control
-type Stash struct {
-	clientID     string
-	clientSecret string
-	url          string
-	client       stash.Stash
-	Controller
-}
+type (
+	// Stash client for interfacing with Stash version control
+	Stash struct {
+		clientID     string
+		clientSecret string
+		url          string
+		client       stash.Stash
+		Controller
+	}
+
+	// StashHook webhook from Stash service
+	StashHook struct {
+		Changesets struct {
+			Values []struct {
+				Changes struct {
+					Values []struct {
+						Path struct {
+							Components []string `json:"components"`
+						} `json:"path"`
+					} `json:"values"`
+				} `json:"changes"`
+			} `json:"values"`
+		} `json:"changesets"`
+		Repository struct {
+			Name    string `json:"name"`
+			Project struct {
+				Name string `json:"name"`
+			} `json:"project"`
+		} `json:"repository"`
+	}
+)
 
 // NewStashClient creates a Stash client
 func NewStashClient(config Config) (Stash, error) {
