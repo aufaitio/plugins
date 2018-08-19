@@ -3,8 +3,8 @@ package plugins
 import (
 	"fmt"
 
-	"github.com/aufaitio/plugins/lib/messaging"
-	"github.com/aufaitio/plugins/lib/versioning"
+	"github.com/quantumew/plugins/lib/messaging"
+	"github.com/quantumew/plugins/lib/versioning"
 )
 
 // NewMessaging creates messaging interface
