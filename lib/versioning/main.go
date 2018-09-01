@@ -4,6 +4,17 @@ import (
 	"github.com/xoom/stash"
 )
 
+const (
+	// BitbucketCloudAdapter represents adapter for Bitbucket Cloud
+	BitbucketCloudAdapter int = iota
+	// BitbucketServerAdapter represents adapter for on premise Bitbucket (Stash)
+	BitbucketServerAdapter
+	// GitHubAdapter represents GitHub adapter
+	GitHubAdapter
+	// GitLabAdapter represents GitLab adapter
+	GitLabAdapter
+)
+
 type (
 	// Controller interface for interacting with version control system
 	Controller interface {
@@ -17,7 +28,7 @@ type (
 		clientID     string
 		clientSecret string
 		room         string
-		ServiceName  string
+		AdapterID    int
 		url          string
 	}
 )

@@ -1,5 +1,10 @@
 package messaging
 
+const (
+	// HipChatAdapter represents adapter for Bitbucket Cloud
+	HipChatAdapter int = iota
+)
+
 type (
 	// Controller interface for interacting with version control system
 	Controller interface {
@@ -10,7 +15,7 @@ type (
 	Config struct {
 		clientID     string
 		clientSecret string
-		ServiceName  string
+		AdapterID    int
 		url          string
 	}
 )

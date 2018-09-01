@@ -1,28 +1,27 @@
 package plugins
 
 import (
-	"fmt"
-
+	"errors"
 	"github.com/quantumew/plugins/lib/messaging"
 	"github.com/quantumew/plugins/lib/versioning"
 )
 
 // NewMessaging creates messaging interface
 func NewMessaging(messagingConfig messaging.Config) (messaging.Controller, error) {
-	switch messagingConfig.ServiceName {
-	case "hipchat":
+	switch messagingConfig.AdapterID {
+	case messaging.HipChatAdapter:
 		return messaging.NewHipChatClient(messagingConfig)
 	}
 
-	return nil, fmt.Errorf("Unsupported messaging plugin: %s", messagingConfig.ServiceName)
+	return nil, errors.New("Unsupported messaging plugin")
 }
 
 // NewVersionControl creates notifier
 func NewVersionControl(versionConfig versioning.Config) (versioning.Controller, error) {
-	switch versionConfig.ServiceName {
-	case "stash":
+	switch versionConfig.AdapterID {
+	case versioning.BitbucketServerAdapter:
 		return versioning.NewStashClient(versionConfig)
 	}
 
-	return nil, fmt.Errorf("Unsupported version control plugin: %s", versionConfig.ServiceName)
+	return nil, errors.New("Unsupported version control plugin")
 }
